@@ -65,7 +65,7 @@ app_ui = ui.page_fluid(
     # Layout
     ui.layout_sidebar(
         # Sidebar
-        ui.panel_sidebar(
+        ui.sidebar(
             ui.h3("🎲 Simulation Settings"),
             
             ui.input_slider(
@@ -131,10 +131,9 @@ app_ui = ui.page_fluid(
             width=350
         ),
         
-        # Main Panel
-        ui.panel_main(
-            # Before simulation
-            ui.panel_conditional(
+        # Main content (no panel_main needed in new API)
+        # Before simulation
+        ui.panel_conditional(
                 "input.run_sim == 0",
                 
                 ui.h2("📋 How It Works"),
