@@ -173,8 +173,7 @@ app_ui = ui.page_fluid(
                 ui.p(ui.em("Based on 'The Goal' by Eliyahu M. Goldratt")),
                 style="text-align: center; color: #666;"
             )
-        )
-    )
+    )  # End of ui.page_fluid
 )
 
 # Server Logic
