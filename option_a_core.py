@@ -74,8 +74,7 @@ app_ui = ui.page_fluid(
     
     # Layout
     ui.layout_sidebar(
-        # Sidebar
-        ui.panel_sidebar(
+        ui.sidebar(
             ui.h3("📊 Configure Your Scenarios"),
             
             ui.input_radio_buttons(
@@ -136,9 +135,8 @@ app_ui = ui.page_fluid(
             width=350
         ),
         
-        # Main Panel
-        ui.panel_main(
-            ui.h2("📊 Scenario Comparison"),
+        # Main content (no panel_main needed in new API)
+        ui.h2("📊 Scenario Comparison"),
             
             # Scenario Cards
             ui.row(
