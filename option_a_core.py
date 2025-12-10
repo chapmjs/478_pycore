@@ -150,8 +150,8 @@ app_ui = ui.page_fluid(
             ui.h2("📈 Visual Comparisons"),
             
             ui.row(
-                ui.column(6, ui.output_ui("throughput_chart")),
-                ui.column(6, ui.output_ui("product_mix_chart"))
+                ui.column(6, ui.output_plot("throughput_chart")),
+                ui.column(6, ui.output_plot("product_mix_chart"))
             ),
             
             ui.hr(),
@@ -275,7 +275,7 @@ def server(input, output, session):
     
     # Throughput comparison chart
     @output
-    @render.ui
+    @render.plot
     def throughput_chart():
         results = solve_scenarios()
         
@@ -302,11 +302,11 @@ def server(input, output, session):
             height=400
         )
         
-        return ui.HTML(fig.to_html(include_plotlyjs='cdn', div_id='throughput_plot'))
+        return fig
     
     # Product mix chart
     @output
-    @render.ui
+    @render.plot
     def product_mix_chart():
         results = solve_scenarios()
         
@@ -337,7 +337,7 @@ def server(input, output, session):
             height=400
         )
         
-        return ui.HTML(fig.to_html(include_plotlyjs='cdn', div_id='product_mix_plot'))
+        return fig
     
     # Insights
     @output
