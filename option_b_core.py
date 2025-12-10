@@ -209,7 +209,7 @@ app_ui = ui.page_fluid(
                 
                 ui.h2("📈 Throughput Distribution"),
                 
-                ui.output_ui("distribution_chart"),
+                ui.output_plot("distribution_chart"),
                 
                 ui.hr(),
                 
@@ -242,8 +242,8 @@ app_ui = ui.page_fluid(
                 ui.h2("📦 Product Mix Variation"),
                 
                 ui.row(
-                    ui.column(6, ui.output_ui("product_a_dist")),
-                    ui.column(6, ui.output_ui("product_b_dist"))
+                    ui.column(6, ui.output_plot("product_a_dist")),
+                    ui.column(6, ui.output_plot("product_b_dist"))
                 ),
                 
                 ui.hr(),
@@ -446,11 +446,11 @@ def server(input, output, session):
     
     # Distribution chart
     @output
-    @render.ui
+    @render.plot
     def distribution_chart():
         df = simulation_data()
         if df is None:
-            return ui.HTML("")
+            return go.Figure()
         
         base = baseline()
         mean_throughput = df['throughput'].mean()
@@ -491,7 +491,7 @@ def server(input, output, session):
             height=500
         )
         
-        return ui.HTML(fig.to_html(include_plotlyjs='cdn', div_id='distribution_plot'))
+        return fig
     
     # Probability analysis
     @output
@@ -549,11 +549,11 @@ def server(input, output, session):
     
     # Product distributions
     @output
-    @render.ui
+    @render.plot
     def product_a_dist():
         df = simulation_data()
         if df is None:
-            return ui.HTML("")
+            return go.Figure()
         
         fig = px.histogram(
             df,
@@ -568,14 +568,14 @@ def server(input, output, session):
             height=350
         )
         
-        return ui.HTML(fig.to_html(include_plotlyjs='cdn', div_id='product_a_plot'))
+        return fig
     
     @output
-    @render.ui
+    @render.plot
     def product_b_dist():
         df = simulation_data()
         if df is None:
-            return ui.HTML("")
+            return go.Figure()
         
         fig = px.histogram(
             df,
@@ -590,7 +590,7 @@ def server(input, output, session):
             height=350
         )
         
-        return ui.HTML(fig.to_html(include_plotlyjs='cdn', div_id='product_b_plot'))
+        return fig
     
     # Insights
     @output
