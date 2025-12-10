@@ -4,6 +4,7 @@ Python Shiny Core Version
 """
 
 from shiny import App, ui, render, reactive
+from shiny.render import render_plotly
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
@@ -446,7 +447,7 @@ def server(input, output, session):
     
     # Distribution chart
     @output
-    @render.plot
+    @render_plotly
     def distribution_chart():
         df = simulation_data()
         if df is None:
@@ -549,7 +550,7 @@ def server(input, output, session):
     
     # Product distributions
     @output
-    @render.plot
+    @render_plotly
     def product_a_dist():
         df = simulation_data()
         if df is None:
@@ -571,7 +572,7 @@ def server(input, output, session):
         return fig
     
     @output
-    @render.plot
+    @render_plotly
     def product_b_dist():
         df = simulation_data()
         if df is None:
